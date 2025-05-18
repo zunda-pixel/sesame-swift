@@ -8,6 +8,7 @@ extension Client {
     command: Command,
     deviceId: UUID,
     deviceSecretKey: String,
+    history: String
   ) async throws -> ExecuteCommandResult {
     let url =
       baseURL
@@ -23,7 +24,7 @@ extension Client {
 
     let command = CommandBody(
       command: command,
-      history: "test".data(using: .utf8)!.base64EncodedString(),
+      history: history.data(using: .utf8)!.base64EncodedString(),
       sign: sign.tag.base64EncodedString()
     )
 

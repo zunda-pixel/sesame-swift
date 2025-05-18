@@ -27,7 +27,8 @@ func executeCommand() async throws {
   let result = try await client.execute(
     command: .lock,
     deviceId: deviceId,
-    deviceSecretKey: devviceSecretKey
+    deviceSecretKey: devviceSecretKey,
+    history: "test"
   )
   print(result)
 }
