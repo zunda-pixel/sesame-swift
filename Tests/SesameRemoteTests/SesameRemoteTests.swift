@@ -8,7 +8,7 @@ let client = Client(
 )
 
 let deviceId = UUID(uuidString: ProcessInfo.processInfo.environment["DEVICE_ID"]!)!
-let devviceSecretKey = ProcessInfo.processInfo.environment["DEVICE_SECRET_KEY"]!
+let deviceSecretKey = ProcessInfo.processInfo.environment["DEVICE_SECRET_KEY"]!
 
 @Test
 func getDevice() async throws {
@@ -31,7 +31,7 @@ func executeCommand() async throws {
   let result = try await client.execute(
     command: .lock,
     deviceId: deviceId,
-    deviceSecretKey: devviceSecretKey,
+    deviceSecretKey: deviceSecretKey,
     history: "test memo"
   )
   print(result)
