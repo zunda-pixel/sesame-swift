@@ -1,6 +1,6 @@
 import Foundation
-import Testing
 import SesameRemote
+import Testing
 
 let client = Client(
   httpClient: .urlSession(.shared),

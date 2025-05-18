@@ -13,14 +13,14 @@ let package = Package(
       name: "Sesame",
       targets: [
         "SesameRemote",
-        "SesameLocal"
+        "SesameLocal",
       ]
-    ),
+    )
   ],
   dependencies: [
     .package(url: "https://github.com/apple/swift-http-types.git", from: "1.3.1"),
     .package(url: "https://github.com/zunda-pixel/http-client.git", from: "0.3.0"),
-    .package(url: "https://github.com/apple/swift-crypto.git", from: "3.12.3")
+    .package(url: "https://github.com/apple/swift-crypto.git", from: "3.12.3"),
   ],
   targets: [
     .target(

@@ -1,5 +1,5 @@
-import HTTPClient
 import Foundation
+import HTTPClient
 import HTTPTypes
 import HTTPTypesFoundation
 
@@ -7,7 +7,7 @@ public struct Client<HTTPClient: HTTPClientProtocol> {
   var httpClient: HTTPClient
   var baseURL = URL(string: "https://app.candyhouse.co")!
   var apiKey: String
-  
+
   public init(
     httpClient: HTTPClient,
     apiKey: String
@@ -17,4 +17,4 @@ public struct Client<HTTPClient: HTTPClientProtocol> {
   }
 }
 
-extension Client: Sendable where HTTPClient: Sendable { }
+extension Client: Sendable where HTTPClient: Sendable {}

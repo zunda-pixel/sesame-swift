@@ -1,7 +1,7 @@
+import Crypto
 import Foundation
 import HTTPTypes
 import HTTPTypesFoundation
-import Crypto
 
 extension Client {
   public func execute(
@@ -9,31 +9,32 @@ extension Client {
     deviceId: UUID,
     deviceSecretKey: String,
   ) async throws -> ExecuteCommandResult {
-    let url = baseURL
+    let url =
+      baseURL
       .appending(path: "/api/sesame2/\(deviceId)/cmd")
-    
+
     let timestamp = UInt32(Date.now.timeIntervalSince1970)
     let timestampSlice = timestamp.data[1..<4]
-    
+
     let sign = try AES.GCM.seal(
       timestampSlice,
       using: .init(data: deviceSecretKey.data(using: .utf8)!)
     )
-    
+
     let command = CommandBody(
       command: command,
       history: "test".data(using: .utf8)!.base64EncodedString(),
       sign: sign.tag.base64EncodedString()
     )
-    
+
     let body = try JSONEncoder().encode(command)
-    
+
     let request = HTTPRequest(
       method: .post,
       url: url,
       headerFields: [.xApiKey: apiKey]
     )
-    
+
     let (data, _) = try await httpClient.execute(for: request, from: body)
     let result = try JSONDecoder().decode(ExecuteCommandResult.self, from: data)
     return result
@@ -44,12 +45,11 @@ public struct ExecuteCommandResult: Codable {
   public var statusCode: Int
 }
 
-
 private struct CommandBody: Encodable {
   var command: Command
   var history: String
   var sign: String
-  
+
   enum CodingKeys: String, CodingKey {
     case command = "cmd"
     case history

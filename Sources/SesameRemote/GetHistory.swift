@@ -8,21 +8,22 @@ extension Client {
     page: UInt = 0,
     maxCount: UInt = 50
   ) async throws -> [History] {
-    let url = baseURL
+    let url =
+      baseURL
       .appending(path: "api/sesame2/\(deviceId)/history")
       .appending(queryItems: [
         .init(name: "page", value: "\(page)"),
         .init(name: "lg", value: "\(maxCount)"),
       ])
-    
+
     let request = HTTPRequest(
       method: .get,
       url: url,
       headerFields: [.xApiKey: apiKey]
     )
-    
+
     let (data, _) = try await httpClient.execute(for: request, from: nil)
-    
+
     let status = try JSONDecoder().decode([History].self, from: data)
     return status
   }
