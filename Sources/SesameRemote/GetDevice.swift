@@ -3,7 +3,7 @@ import HTTPTypes
 import HTTPTypesFoundation
 
 extension Client {
-  func device(_ deviceId: UUID) async throws -> Device {
+  public func device(_ deviceId: UUID) async throws -> Device {
     let url = baseURL
       .appending(path: "/api/sesame2/\(deviceId)")
     
@@ -20,22 +20,22 @@ extension Client {
   }
 }
 
-struct Device: Codable {
-  var batteryPersentage: Int
-  var batteryVoltage: Double
-  var position: Int
-  var chSesame2Status: Status
-  var timestamp: Int
+public struct Device: Codable {
+  public var batteryPersentage: Int
+  public var batteryVoltage: Double
+  public var position: Int
+  public var status: Status
+  public var timestamp: Int
 
-  enum CodingKeys: String, CodingKey {
+  public enum CodingKeys: String, CodingKey {
     case batteryPersentage
     case batteryVoltage
     case position
-    case chSesame2Status =  "CHSesame2Status"
+    case status =  "CHSesame2Status"
     case timestamp
   }
   
-  enum Status: String, Codable {
+  public enum Status: String, Codable {
     case locked
     case unlocked
     case moved

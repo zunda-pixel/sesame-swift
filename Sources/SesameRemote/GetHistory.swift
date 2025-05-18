@@ -3,12 +3,16 @@ import HTTPTypes
 import HTTPTypesFoundation
 
 extension Client {
-  func histories(deviceId: UUID, page: UInt = 0, order: Order = .newest) async throws -> [History] {    
+  public func histories(
+    deviceId: UUID,
+    page: UInt = 0,
+    maxCount: UInt = 50
+  ) async throws -> [History] {
     let url = baseURL
       .appending(path: "api/sesame2/\(deviceId)/history")
       .appending(queryItems: [
         .init(name: "page", value: "\(page)"),
-        .init(name: "lg", value: "\(order.rawValue)"),
+        .init(name: "lg", value: "\(maxCount)"),
       ])
     
     let request = HTTPRequest(
@@ -24,20 +28,15 @@ extension Client {
   }
 }
 
-enum Order: UInt {
-  case newest = 1
-  case oldest = 2
-}
-
-struct History: Codable {
-  var type: Status
-  var timestamp: Double
-  var tag: String
-  var recordId: UInt
+public struct History: Codable {
+  public var type: Status
+  public var timestamp: Double
+  public var tag: String
+  public var recordId: UInt
 }
 
 extension History {
-  enum Status: UInt, Codable {
+  public enum Status: UInt, Codable {
     case none
     case bleLock
     case bleUnLock
