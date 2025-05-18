@@ -28,7 +28,7 @@ public struct Device: Codable {
   public var status: Status
   public var timestamp: Int
 
-  public enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: String, CodingKey {
     case batteryPersentage
     case batteryVoltage
     case position

@@ -32,8 +32,34 @@ extension Client {
 public struct History: Codable {
   public var type: Status
   public var timestamp: Double
-  public var tag: String
+  public var tag: String?
   public var recordId: UInt
+
+  private enum CodingKeys: String, CodingKey {
+    case type
+    case timestamp
+    case tag = "historyTag"
+    case recordId = "recordId"
+  }
+
+  public func encode(to encoder: any Encoder) throws {
+    var container = encoder.container(keyedBy: CodingKeys.self)
+    try container.encode(self.type, forKey: .type)
+    try container.encode(self.timestamp, forKey: .timestamp)
+    try container.encodeIfPresent(self.tag?.data(using: .utf8)!.base64EncodedString(), forKey: .tag)
+    try container.encode(self.recordId, forKey: .recordId)
+  }
+
+  public init(from decoder: any Decoder) throws {
+    let container = try decoder.container(keyedBy: CodingKeys.self)
+    self.type = try container.decode(History.Status.self, forKey: .type)
+    self.timestamp = try container.decode(Double.self, forKey: .timestamp)
+    let tag = try container.decodeIfPresent(String.self, forKey: .tag)
+    self.tag = tag.flatMap {
+      Data(base64Encoded: $0).flatMap { String(data: $0, encoding: .utf8)! }
+    }
+    self.recordId = try container.decode(UInt.self, forKey: .recordId)
+  }
 }
 
 extension History {

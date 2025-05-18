@@ -51,7 +51,7 @@ private struct CommandBody: Encodable {
   var history: String
   var sign: String
 
-  enum CodingKeys: String, CodingKey {
+  private enum CodingKeys: String, CodingKey {
     case command = "cmd"
     case history
     case sign

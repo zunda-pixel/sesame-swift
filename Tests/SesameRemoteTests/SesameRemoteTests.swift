@@ -28,7 +28,7 @@ func executeCommand() async throws {
     command: .lock,
     deviceId: deviceId,
     deviceSecretKey: devviceSecretKey,
-    history: "test"
+    history: "test memo"
   )
   print(result)
 }
