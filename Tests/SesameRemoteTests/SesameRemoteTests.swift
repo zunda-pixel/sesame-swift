@@ -18,7 +18,11 @@ func getDevice() async throws {
 
 @Test
 func getHistories() async throws {
-  let histories = try await client.histories(deviceId: deviceId)
+  let histories = try await client.histories(
+    deviceId: deviceId,
+    page: 0,
+    maxCount: 2
+  )
   print(histories)
 }
 

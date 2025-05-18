@@ -22,18 +22,20 @@ extension Client {
 }
 
 public struct Device: Codable {
-  public var batteryPersentage: Int
+  public var batteryPercentage: Int
   public var batteryVoltage: Double
   public var position: Int
   public var status: Status
   public var timestamp: Int
+  public var wm2State: Bool
 
   private enum CodingKeys: String, CodingKey {
-    case batteryPersentage
+    case batteryPercentage
     case batteryVoltage
     case position
     case status = "CHSesame2Status"
     case timestamp
+    case wm2State
   }
 
   public enum Status: String, Codable {
