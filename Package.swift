@@ -6,7 +6,7 @@ let package = Package(
   name: "sesame-swift",
   platforms: [
     .iOS(.v13),
-    .macOS(.v10_15),
+    .macOS(.v13),
   ],
   products: [
     .library(
