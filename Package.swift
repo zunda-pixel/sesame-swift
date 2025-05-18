@@ -6,20 +6,21 @@ let package = Package(
   name: "sesame-swift",
   platforms: [
     .iOS(.v13),
-    .macOS(.v10_15),
+    .macOS(.v13),
   ],
   products: [
     .library(
       name: "Sesame",
       targets: [
         "SesameRemote",
-        "SesameLocal"
+        "SesameLocal",
       ]
-    ),
+    )
   ],
   dependencies: [
     .package(url: "https://github.com/apple/swift-http-types.git", from: "1.3.1"),
     .package(url: "https://github.com/zunda-pixel/http-client.git", from: "0.3.0"),
+    .package(url: "https://github.com/apple/swift-crypto.git", from: "3.12.3"),
   ],
   targets: [
     .target(
@@ -31,6 +32,7 @@ let package = Package(
         .product(name: "HTTPClient", package: "http-client"),
         .product(name: "HTTPTypes", package: "swift-http-types"),
         .product(name: "HTTPTypesFoundation", package: "swift-http-types"),
+        .product(name: "Crypto", package: "swift-crypto"),
       ]
     ),
     .testTarget(
