@@ -8,7 +8,7 @@ extension Client {
     command: Command,
     deviceId: UUID,
     deviceSecretKey: String,
-    history: String
+    history: String? = nil
   ) async throws -> ExecuteCommandResult {
     let url =
       baseURL
@@ -24,7 +24,7 @@ extension Client {
 
     let command = CommandBody(
       command: command,
-      history: history.data(using: .utf8)!.base64EncodedString(),
+      history: history?.data(using: .utf8)!.base64EncodedString(),
       sign: sign.tag.base64EncodedString()
     )
 
@@ -48,7 +48,7 @@ public struct ExecuteCommandResult: Codable {
 
 private struct CommandBody: Encodable {
   var command: Command
-  var history: String
+  var history: String?
   var sign: String
 
   private enum CodingKeys: String, CodingKey {
