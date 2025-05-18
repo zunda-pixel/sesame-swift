@@ -10,7 +10,7 @@ extension Client {
   ) async throws -> [History] {
     let url =
       baseURL
-      .appending(path: "api/sesame2/\(deviceId)/history")
+      .appending(path: "/api/sesame2/\(deviceId)/history")
       .appending(queryItems: [
         .init(name: "page", value: "\(page)"),
         .init(name: "lg", value: "\(maxCount)"),
