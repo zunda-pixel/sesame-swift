@@ -1,13 +1,13 @@
 {
-  "originHash" : "44919cb614bee64afb45b056d7a44cc6cacdec8460fcad2999612be0ad602f3c",
+  "originHash" : "3bdc4a8987819f58992644e22eaaa70db8933f4dfcffbfc57b51547d80430be6",
   "pins" : [
     {
       "identity" : "http-client",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/zunda-pixel/http-client.git",
       "state" : {
-        "revision" : "88acdc5c925661d7a53017dfc9cccae6554b02a0",
-        "version" : "0.3.0"
+        "revision" : "2a073b058e4c2ffc2810373ac98dc2eeb5974e5e",
+        "version" : "0.3.1"
       }
     },
     {
